@@ -171,11 +171,27 @@
   .story-text .finale {
     text-indent: 0;
     text-align: center;
-    margin-top: 16px;
-    font-size: 1.35rem;
+    margin-top: 20px;
+    margin-bottom: 4px;
+    font-size: 1.4rem;
     color: #1a1210;
-    font-style: italic;
-    letter-spacing: 0.5px;
+    font-style: normal;
+    letter-spacing: 0;
+    line-height: 2.2;
+    position: relative;
+  }
+
+  .finale span {
+    display: inline-block;
+    font-family: 'Bad Script', cursive;
+    position: relative;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.8s ease;
+  }
+
+  .finale.assembled span {
+    transform: none !important;
+    opacity: 1 !important;
   }
 
   .ending {
@@ -281,13 +297,70 @@
     <p class="solo">Но кот медленно рисовал себя сам.</p>
     <p>Каждую ночь он добавлял одну маленькую черту. Сначала появились усы. Потом когти. Потом рот.</p>
     <p>На следующей странице тетради оказался ещё один рисунок — уже не кот. Это была дверь. А над дверью была маленькая подпись, кривыми карандашными буквами:</p>
-    <p class="finale">«Когда я дорисую себя полностью — я выйду»</p>
+    <p class="finale" id="finale"></p>
   </div>
 
   <div class="ending">&#10045;</div>
   <div class="page-curl"></div>
   <a href="../" class="back-link">← назад к тетради</a>
 </div>
+
+<script>
+const text = '«Когда я дорисую себя полностью — я выйду»';
+const el = document.getElementById('finale');
+
+function seeded(i) {
+  return Math.sin(i * 127.1 + 311.7) * 43758.5453 % 1;
+}
+
+const spans = [];
+
+text.split('').forEach((char, i) => {
+  const span = document.createElement('span');
+  span.textContent = char === ' ' ? '\u00A0' : char;
+
+  if (char !== ' ') {
+    const rot = (seeded(i) - 0.5) * 18;
+    const dy = (seeded(i + 50) - 0.5) * 5;
+    const dx = (seeded(i + 100) - 0.5) * 2;
+    const scale = 0.9 + seeded(i + 200) * 0.25;
+
+    span.dataset.crooked = `rotate(${rot}deg) translateY(${dy}px) translateX(${dx}px) scale(${scale})`;
+    span.dataset.opacity = (0.7 + seeded(i + 150) * 0.3).toString();
+    span.style.transform = span.dataset.crooked;
+    span.style.opacity = span.dataset.opacity;
+    // stagger the transition for a wave effect
+    span.style.transitionDelay = (i * 0.02) + 's';
+  }
+
+  spans.push(span);
+  el.appendChild(span);
+});
+
+// Loop: scattered 5s → assembled 2s → scattered ...
+let assembled = false;
+
+function toggle() {
+  assembled = !assembled;
+
+  if (assembled) {
+    el.classList.add('assembled');
+    setTimeout(toggle, 2000);    // stay readable for 2s
+  } else {
+    el.classList.remove('assembled');
+    // restore crooked transforms
+    spans.forEach(span => {
+      if (span.dataset.crooked) {
+        span.style.transform = span.dataset.crooked;
+        span.style.opacity = span.dataset.opacity;
+      }
+    });
+    setTimeout(toggle, 5000);    // stay scattered for 5s
+  }
+}
+
+setTimeout(toggle, 5000);  // first assemble after 5s
+</script>
 
 </body>
 </html>
