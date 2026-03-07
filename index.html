@@ -336,6 +336,26 @@
   .bonus-card .hole:nth-child(2) { top: 80px; }
   .bonus-card .hole:nth-child(3) { top: 130px; }
 
+  .bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .warm-badge {
+    background: #8b4560 !important;
+  }
+
+  .warm-card {
+    transform: rotate(-1.5deg);
+  }
+
+  .warm-card:hover {
+    transform: rotate(0deg) translateY(-4px);
+  }
+
   /* ── animations ── */
   @keyframes fadeDown {
     from { opacity: 0; transform: translateY(-16px); }
@@ -363,16 +383,27 @@
 <div class="tales" id="tales"></div>
 
 <div class="bonus-section">
-  <div class="divider"><span>последняя страница</span></div>
-  <a href="kot-posledney-stranitsy/" class="bonus-card">
-    <div class="hole"></div>
-    <div class="hole"></div>
-    <div class="hole"></div>
-    <div class="bonus-badge">бонус</div>
-    <h2>Кот из последней страницы</h2>
-    <p>На последней странице старой тетради кто-то однажды нарисовал кота. Рисунок был странный...</p>
-    <span class="read-more">открыть</span>
-  </a>
+  <div class="divider"><span>а в конце тетради...</span></div>
+  <div class="bonus-grid">
+    <a href="kogda-tetrad-zakryvaetsya/" class="bonus-card warm-card">
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="bonus-badge warm-badge">предпоследняя страница</div>
+      <h2>Когда тетрадь закрывается</h2>
+      <p>В одной тетради на разных страницах жили два кота. Они не могли встретиться — между ними было слишком много страниц...</p>
+      <span class="read-more">читать</span>
+    </a>
+    <a href="kot-posledney-stranitsy/" class="bonus-card">
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="hole"></div>
+      <div class="bonus-badge">последняя страница</div>
+      <h2>Кот из последней страницы</h2>
+      <p>На последней странице старой тетради кто-то однажды нарисовал кота. Рисунок был странный...</p>
+      <span class="read-more">открыть</span>
+    </a>
+  </div>
 </div>
 
 <div class="footer">если долго смотреть на чистый лист — между строк шевелятся крылья</div>
@@ -425,7 +456,7 @@ tales.forEach((tale, i) => {
     <div class="hole"></div>
     <div class="hole"></div>
     <div class="hole"></div>
-    <span class="tale-number">№ ${i + 1}</span>
+    <span class="tale-number">№${i + 1}</span>
     <h2>${tale.title}</h2>
     <p>${tale.teaser}</p>
     <span class="read-more">читать</span>
