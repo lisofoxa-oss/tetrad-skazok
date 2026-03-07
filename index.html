@@ -193,6 +193,149 @@
     animation: fadeUp 0.6s ease-out 0.8s both;
   }
 
+  /* ── bonus section ── */
+  .bonus-section {
+    margin-top: 60px;
+    max-width: 900px;
+    width: 100%;
+    animation: fadeUp 0.6s ease-out 1s both;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #5a4a5a44, transparent);
+  }
+
+  .divider span {
+    font-family: 'Bad Script', cursive;
+    font-size: 0.95rem;
+    color: #8a7a6a;
+    white-space: nowrap;
+    letter-spacing: 1px;
+  }
+
+  .bonus-card {
+    position: relative;
+    background: #f5eed9;
+    background-image:
+      linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 27px, #c9b99a33 27px, #c9b99a33 28px);
+    background-size: 100% 28px;
+    border-radius: 3px 10px 10px 3px;
+    padding: 32px 28px 28px 44px;
+    box-shadow:
+      -3px 0 0 #e8dcc6,
+      -6px 0 0 #ddd0b8,
+      0 6px 30px rgba(0,0,0,0.4);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    max-width: 380px;
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    transform: rotate(1.5deg);
+  }
+
+  .bonus-card:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow:
+      -3px 0 0 #e8dcc6,
+      -6px 0 0 #ddd0b8,
+      0 12px 40px rgba(0,0,0,0.5);
+  }
+
+  .bonus-card::before {
+    content: '';
+    position: absolute;
+    left: 34px;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: rgba(200, 80, 80, 0.25);
+  }
+
+  .bonus-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(to right, #ede4cc, #f2e9d2);
+    border-right: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .bonus-card .bonus-badge {
+    display: inline-block;
+    background: #3a2e28;
+    color: #f5eed9;
+    font-family: 'Bad Script', cursive;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bonus-card h2 {
+    font-family: 'Marck Script', cursive;
+    font-size: 1.4rem;
+    color: #3a2e28;
+    font-weight: 400;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bonus-card p {
+    font-family: 'Bad Script', cursive;
+    font-size: 0.95rem;
+    line-height: 26px;
+    color: #5a4e44;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bonus-card .read-more {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: 'Bad Script', cursive;
+    font-size: 0.9rem;
+    color: #8a7a6a;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s;
+  }
+
+  .bonus-card:hover .read-more { color: #3a2e28; }
+  .bonus-card .read-more::after { content: ' →'; }
+
+  .bonus-card .hole {
+    position: absolute;
+    left: 8px;
+    width: 10px;
+    height: 10px;
+    background: #1a1520;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    z-index: 2;
+  }
+  .bonus-card .hole:nth-child(1) { top: 30px; }
+  .bonus-card .hole:nth-child(2) { top: 80px; }
+  .bonus-card .hole:nth-child(3) { top: 130px; }
+
   /* ── animations ── */
   @keyframes fadeDown {
     from { opacity: 0; transform: translateY(-16px); }
@@ -218,6 +361,19 @@
 </div>
 
 <div class="tales" id="tales"></div>
+
+<div class="bonus-section">
+  <div class="divider"><span>последняя страница</span></div>
+  <a href="kot-posledney-stranitsy/" class="bonus-card">
+    <div class="hole"></div>
+    <div class="hole"></div>
+    <div class="hole"></div>
+    <div class="bonus-badge">бонус</div>
+    <h2>Кот из последней страницы</h2>
+    <p>На последней странице старой тетради кто-то однажды нарисовал кота. Рисунок был странный...</p>
+    <span class="read-more">открыть</span>
+  </a>
+</div>
 
 <div class="footer">если долго смотреть на чистый лист — между строк шевелятся крылья</div>
 
