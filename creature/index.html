@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сказка из тетради</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Marck+Script&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1520;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(80, 50, 90, 0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(40, 50, 100, 0.25) 0%, transparent 50%);
+    padding: 40px 20px;
+    font-family: 'Bad Script', cursive;
+  }
+
+  .notebook {
+    position: relative;
+    max-width: 660px;
+    width: 100%;
+    background: #f5eed9;
+    background-image:
+      linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 31px, #c9b99a44 31px, #c9b99a44 32px);
+    background-size: 100% 32px;
+    border-radius: 4px 12px 12px 4px;
+    padding: 48px 50px 60px 70px;
+    box-shadow:
+      -4px 0 0 #e8dcc6,
+      -8px 0 0 #ddd0b8,
+      0 8px 40px rgba(0,0,0,0.5),
+      0 2px 10px rgba(0,0,0,0.3);
+    overflow: hidden;
+  }
+
+  .notebook::before {
+    content: '';
+    position: absolute;
+    left: 54px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(200, 80, 80, 0.3);
+  }
+
+  .notebook::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 48px;
+    background: linear-gradient(to right, #ede4cc, #f2e9d2);
+    border-right: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .holes {
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+  }
+
+  .hole {
+    width: 16px;
+    height: 16px;
+    background: #1a1520;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  .hole:nth-child(1) { top: 80px; }
+  .hole:nth-child(2) { top: 280px; }
+  .hole:nth-child(3) { top: 480px; }
+  .hole:nth-child(4) { top: 680px; }
+
+  .title-area {
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .title-area h1 {
+    font-family: 'Marck Script', cursive;
+    font-size: 2rem;
+    color: #3a2e28;
+    font-weight: 400;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .title-area h1::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: -10%;
+    width: 120%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #8a7a6a, transparent);
+  }
+
+  .story-text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Bad Script', cursive;
+    font-size: 1.25rem;
+    line-height: 32px;
+    color: #2c2420;
+    text-align: left;
+  }
+
+  .creature-float {
+    float: right;
+    width: 240px;
+    height: 340px;
+    margin: 0 -10px 10px 24px;
+    shape-outside: ellipse(50% 48% at 50% 50%);
+    position: relative;
+  }
+
+  .creature-float img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .story-text p {
+    text-indent: 2em;
+    margin-bottom: 0;
+  }
+
+  .story-text p + p {
+    margin-top: 4px;
+  }
+
+  .ending {
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Marck Script', cursive;
+    font-size: 1.1rem;
+    color: #8a7a6a;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ending::before,
+  .ending::after {
+    content: '~';
+    margin: 0 12px;
+    opacity: 0.5;
+  }
+
+  /* ink splatter decorations */
+  .ink-spot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(30, 25, 40, 0.06);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .ink-spot:nth-child(1) { width: 8px; height: 8px; top: 120px; right: 80px; }
+  .ink-spot:nth-child(2) { width: 5px; height: 5px; bottom: 150px; left: 90px; }
+  .ink-spot:nth-child(3) { width: 12px; height: 10px; bottom: 60px; right: 120px; border-radius: 60% 40% 50% 50%; }
+
+  /* page curl */
+  .page-curl {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, transparent 50%, #e8dcc6 50%, #ddd0b8 100%);
+    z-index: 3;
+    border-radius: 0 0 12px 0;
+  }
+
+  /* fade-in animation */
+  .story-text, .title-area, .ending {
+    animation: fadeIn 1.5s ease-out both;
+  }
+  .title-area { animation-delay: 0.2s; }
+  .story-text { animation-delay: 0.6s; }
+  .ending { animation-delay: 1.2s; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .back-link {
+    position: relative;
+    z-index: 5;
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    font-family: 'Bad Script', cursive;
+    font-size: 0.95rem;
+    color: #8a7a6a;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .back-link:hover { color: #3a2e28; }
+
+  @media (max-width: 520px) {
+    .notebook { padding: 40px 28px 50px 58px; }
+    .creature-float { width: 160px; height: 230px; }
+    .story-text { font-size: 1.05rem; line-height: 32px; }
+    .title-area h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="notebook">
+  <div class="holes">
+    <div class="hole"></div>
+    <div class="hole"></div>
+    <div class="hole"></div>
+    <div class="hole"></div>
+  </div>
+
+  <div class="ink-spot"></div>
+  <div class="ink-spot"></div>
+  <div class="ink-spot"></div>
+
+  <div class="title-area">
+    <h1>Существо из тетради</h1>
+  </div>
+
+  <div class="story-text">
+    <div class="creature-float">
+      <img src="creature.png" alt="Крылатое существо">
+    </div>
+    <p>В тетради, между строчек, жило маленькое крылатое существо с хвостом, как у кометы. Днём оно притворялось кляксой, а ночью расправляло тонкие крылья и вылетало из бумаги.</p>
+    <p>Однажды оно услышало, как человек вздыхает над пустой страницей — не было ни идей, ни слов. Существо тихо коснулось пера, и строчки сами собой наполнились сказками и смелыми мыслями.</p>
+    <p>С тех пор, если долго смотреть на чистый лист и не бояться темноты, можно заметить, как между строк шевелятся крылья — значит, вдохновение рядом.</p>
+  </div>
+
+  <div class="ending">&#10045;</div>
+  <div class="page-curl"></div>
+  <a href="../" class="back-link">← назад к тетради</a>
+</div>
+
+</body>
+</html>
