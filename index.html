@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тетрадь сказок</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Marck+Script&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: #1a1520;
+    background-image:
+      radial-gradient(ellipse at 30% 20%, rgba(80, 50, 90, 0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(40, 50, 100, 0.2) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 60px;
+    font-family: 'Bad Script', cursive;
+  }
+
+  /* ── header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    animation: fadeDown 0.8s ease-out both;
+  }
+
+  .header h1 {
+    font-family: 'Marck Script', cursive;
+    font-size: 2.8rem;
+    color: #e8dcc6;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+
+  .header .subtitle {
+    font-family: 'Bad Script', cursive;
+    font-size: 1.1rem;
+    color: #8a7a6a;
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* ── tales grid ── */
+  .tales {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  /* ── single tale card ── */
+  .tale-card {
+    position: relative;
+    background: #f5eed9;
+    background-image:
+      linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 27px, #c9b99a33 27px, #c9b99a33 28px);
+    background-size: 100% 28px;
+    border-radius: 3px 10px 10px 3px;
+    padding: 32px 28px 28px 44px;
+    box-shadow:
+      -3px 0 0 #e8dcc6,
+      -6px 0 0 #ddd0b8,
+      0 6px 30px rgba(0,0,0,0.4);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    animation: fadeUp 0.6s ease-out both;
+  }
+
+  .tale-card:hover {
+    transform: translateY(-4px) rotate(-0.5deg);
+    box-shadow:
+      -3px 0 0 #e8dcc6,
+      -6px 0 0 #ddd0b8,
+      0 12px 40px rgba(0,0,0,0.5);
+  }
+
+  /* red margin line */
+  .tale-card::before {
+    content: '';
+    position: absolute;
+    left: 34px;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: rgba(200, 80, 80, 0.25);
+  }
+
+  /* left margin area */
+  .tale-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(to right, #ede4cc, #f2e9d2);
+    border-right: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .tale-card .tale-number {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: 'Marck Script', cursive;
+    font-size: 0.85rem;
+    color: #b8a890;
+  }
+
+  .tale-card h2 {
+    font-family: 'Marck Script', cursive;
+    font-size: 1.5rem;
+    color: #3a2e28;
+    font-weight: 400;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tale-card p {
+    font-family: 'Bad Script', cursive;
+    font-size: 1rem;
+    line-height: 28px;
+    color: #5a4e44;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tale-card .read-more {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: 'Bad Script', cursive;
+    font-size: 0.95rem;
+    color: #8a7a6a;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s;
+  }
+
+  .tale-card:hover .read-more {
+    color: #3a2e28;
+  }
+
+  .tale-card .read-more::after {
+    content: ' →';
+  }
+
+  /* ── spiral holes on cards ── */
+  .tale-card .hole {
+    position: absolute;
+    left: 8px;
+    width: 10px;
+    height: 10px;
+    background: #1a1520;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    z-index: 2;
+  }
+  .tale-card .hole:nth-child(1) { top: 30px; }
+  .tale-card .hole:nth-child(2) { top: 80px; }
+  .tale-card .hole:nth-child(3) { top: 130px; }
+
+  /* ── ink stain decoration on card ── */
+  .tale-card .ink {
+    position: absolute;
+    bottom: 14px;
+    right: 18px;
+    width: 6px;
+    height: 6px;
+    background: rgba(30, 25, 40, 0.07);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  /* ── footer ── */
+  .footer {
+    margin-top: 60px;
+    text-align: center;
+    font-family: 'Bad Script', cursive;
+    font-size: 0.9rem;
+    color: #5a4a5a;
+    opacity: 0.6;
+    animation: fadeUp 0.6s ease-out 0.8s both;
+  }
+
+  /* ── animations ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 520px) {
+    .header h1 { font-size: 2rem; }
+    .tales { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Тетрадь сказок</h1>
+  <div class="subtitle">маленькие истории, нарисованные чернилами</div>
+</div>
+
+<div class="tales" id="tales"></div>
+
+<div class="footer">если долго смотреть на чистый лист — между строк шевелятся крылья</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+//  ДОБАВЛЯЙ НОВЫЕ СКАЗКИ СЮДА ↓
+//  dir   — название папки
+//  title — название сказки
+//  teaser — короткий отрывок (1-2 предложения)
+// ═══════════════════════════════════════════════════
+const tales = [
+  {
+    dir: "creature",
+    title: "Существо из тетради",
+    teaser: "В тетради, между строчек, жило маленькое крылатое существо с хвостом, как у кометы..."
+  },
+  // {
+  //   dir: "next-tale",
+  //   title: "Название следующей сказки",
+  //   teaser: "Краткое описание..."
+  // },
+];
+// ═══════════════════════════════════════════════════
+
+const container = document.getElementById('tales');
+
+tales.forEach((tale, i) => {
+  const card = document.createElement('a');
+  card.href = tale.dir + '/';
+  card.className = 'tale-card';
+  card.style.animationDelay = (0.3 + i * 0.15) + 's';
+
+  card.innerHTML = `
+    <div class="hole"></div>
+    <div class="hole"></div>
+    <div class="hole"></div>
+    <span class="tale-number">№${i + 1}</span>
+    <h2>${tale.title}</h2>
+    <p>${tale.teaser}</p>
+    <span class="read-more">читать</span>
+    <div class="ink"></div>
+  `;
+
+  container.appendChild(card);
+});
+</script>
+
+</body>
+</html>
