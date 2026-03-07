@@ -244,11 +244,13 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     cursor: pointer;
-    transform: rotate(1.5deg);
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
   }
 
   .bonus-card:hover {
-    transform: rotate(0deg) translateY(-4px);
+    transform: translateY(-4px) translateZ(0);
     box-shadow:
       -3px 0 0 #e8dcc6,
       -6px 0 0 #ddd0b8,
@@ -281,12 +283,13 @@
     background: #3a2e28;
     color: #f5eed9;
     font-family: 'Bad Script', cursive;
-    font-size: 0.7rem;
-    padding: 2px 8px;
+    font-size: 0.8rem;
+    padding: 3px 10px;
     border-radius: 6px;
     margin-bottom: 6px;
     position: relative;
     z-index: 1;
+    -webkit-font-smoothing: antialiased;
   }
 
   .bonus-card h2 {
@@ -349,11 +352,11 @@
   }
 
   .warm-card {
-    transform: rotate(-1.5deg);
+    transform: translateZ(0);
   }
 
   .warm-card:hover {
-    transform: rotate(0deg) translateY(-4px);
+    transform: translateY(-4px) translateZ(0);
   }
 
   /* ── animations ── */
