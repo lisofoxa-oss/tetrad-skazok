@@ -6,469 +6,117 @@
 <title>Тетрадь сказок</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Marck+Script&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
-    min-height: 100vh;
-    background: #1a1520;
-    background-image:
-      radial-gradient(ellipse at 30% 20%, rgba(80, 50, 90, 0.3) 0%, transparent 60%),
-      radial-gradient(ellipse at 70% 80%, rgba(40, 50, 100, 0.2) 0%, transparent 50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px 60px;
-    font-family: 'Bad Script', cursive;
+    min-height: 100vh; background: #1a1520;
+    background-image: radial-gradient(ellipse at 30% 20%, rgba(80,50,90,0.3) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(40,50,100,0.2) 0%, transparent 50%);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 60px; font-family: 'Bad Script', cursive;
   }
-
-  /* ── header ── */
-  .header {
-    text-align: center;
-    margin-bottom: 48px;
-    animation: fadeDown 0.8s ease-out both;
-  }
-
-  .header h1 {
-    font-family: 'Marck Script', cursive;
-    font-size: 2.8rem;
-    color: #e8dcc6;
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-  }
-
-  .header .subtitle {
-    font-family: 'Bad Script', cursive;
-    font-size: 1.1rem;
-    color: #8a7a6a;
-    margin-top: 8px;
-    letter-spacing: 1px;
-  }
-
-  /* ── tales grid ── */
-  .tales {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 32px;
-    max-width: 900px;
-    width: 100%;
-  }
-
-  /* ── single tale card ── */
-  .tale-card {
-    position: relative;
-    background: #f5eed9;
-    background-image:
-      linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 27px, #c9b99a33 27px, #c9b99a33 28px);
-    background-size: 100% 28px;
-    border-radius: 3px 10px 10px 3px;
-    padding: 32px 28px 28px 44px;
-    box-shadow:
-      -3px 0 0 #e8dcc6,
-      -6px 0 0 #ddd0b8,
-      0 6px 30px rgba(0,0,0,0.4);
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-    cursor: pointer;
-    animation: fadeUp 0.6s ease-out both;
-  }
-
-  .tale-card:hover {
-    transform: translateY(-4px) rotate(-0.5deg);
-    box-shadow:
-      -3px 0 0 #e8dcc6,
-      -6px 0 0 #ddd0b8,
-      0 12px 40px rgba(0,0,0,0.5);
-  }
-
-  /* red margin line */
-  .tale-card::before {
-    content: '';
-    position: absolute;
-    left: 34px;
-    top: 0;
-    bottom: 0;
-    width: 1.5px;
-    background: rgba(200, 80, 80, 0.25);
-  }
-
-  /* left margin area */
-  .tale-card::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 30px;
-    background: linear-gradient(to right, #ede4cc, #f2e9d2);
-    border-right: 1px solid rgba(0,0,0,0.04);
-  }
-
-  .tale-card .tale-number {
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    font-family: 'Marck Script', cursive;
-    font-size: 0.85rem;
-    color: #b8a890;
-  }
-
-  .tale-card h2 {
-    font-family: 'Marck Script', cursive;
-    font-size: 1.5rem;
-    color: #3a2e28;
-    font-weight: 400;
-    margin-bottom: 10px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .tale-card p {
-    font-family: 'Bad Script', cursive;
-    font-size: 1rem;
-    line-height: 28px;
-    color: #5a4e44;
-    position: relative;
-    z-index: 1;
-  }
-
-  .tale-card .read-more {
-    display: inline-block;
-    margin-top: 14px;
-    font-family: 'Bad Script', cursive;
-    font-size: 0.95rem;
-    color: #8a7a6a;
-    position: relative;
-    z-index: 1;
-    transition: color 0.3s;
-  }
-
-  .tale-card:hover .read-more {
-    color: #3a2e28;
-  }
-
-  .tale-card .read-more::after {
-    content: ' →';
-  }
-
-  /* ── spiral holes on cards ── */
-  .tale-card .hole {
-    position: absolute;
-    left: 8px;
-    width: 10px;
-    height: 10px;
-    background: #1a1520;
-    border-radius: 50%;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-    z-index: 2;
-  }
-  .tale-card .hole:nth-child(1) { top: 30px; }
-  .tale-card .hole:nth-child(2) { top: 80px; }
-  .tale-card .hole:nth-child(3) { top: 130px; }
-
-  /* ── ink stain decoration on card ── */
-  .tale-card .ink {
-    position: absolute;
-    bottom: 14px;
-    right: 18px;
-    width: 6px;
-    height: 6px;
-    background: rgba(30, 25, 40, 0.07);
-    border-radius: 50%;
-    z-index: 1;
-  }
-
-  /* ── footer ── */
-  .footer {
-    margin-top: 60px;
-    text-align: center;
-    font-family: 'Bad Script', cursive;
-    font-size: 0.9rem;
-    color: #5a4a5a;
-    opacity: 0.6;
-    animation: fadeUp 0.6s ease-out 0.8s both;
-  }
-
-  /* ── bonus section ── */
-  .bonus-section {
-    margin-top: 60px;
-    max-width: 900px;
-    width: 100%;
-    animation: fadeUp 0.6s ease-out 1s both;
-  }
-
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-
-  .divider::before,
-  .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #5a4a5a44, transparent);
-  }
-
-  .divider span {
-    font-family: 'Bad Script', cursive;
-    font-size: 0.95rem;
-    color: #8a7a6a;
-    white-space: nowrap;
-    letter-spacing: 1px;
-  }
-
-  .bonus-card {
-    position: relative;
-    background: #f5eed9;
-    background-image:
-      linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 27px, #c9b99a33 27px, #c9b99a33 28px);
-    background-size: 100% 28px;
-    border-radius: 3px 10px 10px 3px;
-    padding: 32px 28px 28px 44px;
-    box-shadow:
-      -3px 0 0 #e8dcc6,
-      -6px 0 0 #ddd0b8,
-      0 6px 30px rgba(0,0,0,0.4);
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    max-width: 380px;
-    margin: 0 auto;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-    cursor: pointer;
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
-    backface-visibility: hidden;
-  }
-
-  .bonus-card:hover {
-    transform: translateY(-4px) translateZ(0);
-    box-shadow:
-      -3px 0 0 #e8dcc6,
-      -6px 0 0 #ddd0b8,
-      0 12px 40px rgba(0,0,0,0.5);
-  }
-
-  .bonus-card::before {
-    content: '';
-    position: absolute;
-    left: 34px;
-    top: 0;
-    bottom: 0;
-    width: 1.5px;
-    background: rgba(200, 80, 80, 0.25);
-  }
-
-  .bonus-card::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 30px;
-    background: linear-gradient(to right, #ede4cc, #f2e9d2);
-    border-right: 1px solid rgba(0,0,0,0.04);
-  }
-
-  .bonus-card .bonus-badge {
-    display: inline-block;
-    background: #3a2e28;
-    color: #f5eed9;
-    font-family: 'Bad Script', cursive;
-    font-size: 0.8rem;
-    padding: 3px 10px;
-    border-radius: 6px;
-    margin-bottom: 6px;
-    position: relative;
-    z-index: 1;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .bonus-card h2 {
-    font-family: 'Marck Script', cursive;
-    font-size: 1.4rem;
-    color: #3a2e28;
-    font-weight: 400;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .bonus-card p {
-    font-family: 'Bad Script', cursive;
-    font-size: 0.95rem;
-    line-height: 26px;
-    color: #5a4e44;
-    position: relative;
-    z-index: 1;
-  }
-
-  .bonus-card .read-more {
-    display: inline-block;
-    margin-top: 12px;
-    font-family: 'Bad Script', cursive;
-    font-size: 0.9rem;
-    color: #8a7a6a;
-    position: relative;
-    z-index: 1;
-    transition: color 0.3s;
-  }
-
-  .bonus-card:hover .read-more { color: #3a2e28; }
-  .bonus-card .read-more::after { content: ' →'; }
-
-  .bonus-card .hole {
-    position: absolute;
-    left: 8px;
-    width: 10px;
-    height: 10px;
-    background: #1a1520;
-    border-radius: 50%;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-    z-index: 2;
-  }
-  .bonus-card .hole:nth-child(1) { top: 30px; }
-  .bonus-card .hole:nth-child(2) { top: 80px; }
-  .bonus-card .hole:nth-child(3) { top: 130px; }
-
-  .bonus-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .warm-badge {
-    background: #8b4560 !important;
-  }
-
-  .warm-card {
-    transform: translateZ(0);
-  }
-
-  .warm-card:hover {
-    transform: translateY(-4px) translateZ(0);
-  }
-
-  /* ── animations ── */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 520px) {
-    .header h1 { font-size: 2rem; }
-    .tales { gap: 24px; }
-  }
+  .lang-sw { position:fixed; top:16px; right:16px; z-index:100; display:flex; gap:4px; background:rgba(30,22,36,0.85); padding:4px; border-radius:8px; backdrop-filter:blur(8px); box-shadow:0 2px 12px rgba(0,0,0,0.4); }
+  .lb { font-family:'Bad Script',cursive; font-size:0.85rem; padding:4px 10px; border:none; border-radius:6px; cursor:pointer; background:transparent; color:#8a7a6a; transition:all 0.2s; }
+  .lb:hover { color:#e8dcc6; }
+  .lb.on { background:#e8dcc6; color:#1a1520; }
+  .header { text-align:center; margin-bottom:48px; animation:fadeDown 0.8s ease-out both; }
+  .header h1 { font-family:'Marck Script',cursive; font-size:2.8rem; color:#e8dcc6; font-weight:400; letter-spacing:2px; text-shadow:0 2px 20px rgba(0,0,0,0.5); }
+  .header .subtitle { font-family:'Bad Script',cursive; font-size:1.1rem; color:#8a7a6a; margin-top:8px; letter-spacing:1px; }
+  .tales { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:32px; max-width:900px; width:100%; }
+  .tc { position:relative; background:#f5eed9; background-image:linear-gradient(rgba(0,0,0,0) 0px,rgba(0,0,0,0) 27px,#c9b99a33 27px,#c9b99a33 28px); background-size:100% 28px; border-radius:3px 10px 10px 3px; padding:32px 28px 28px 44px; box-shadow:-3px 0 0 #e8dcc6,-6px 0 0 #ddd0b8,0 6px 30px rgba(0,0,0,0.4); text-decoration:none; color:inherit; display:block; transition:transform 0.3s,box-shadow 0.3s; overflow:hidden; cursor:pointer; animation:fadeUp 0.6s ease-out both; }
+  .tc:hover { transform:translateY(-4px) rotate(-0.5deg); box-shadow:-3px 0 0 #e8dcc6,-6px 0 0 #ddd0b8,0 12px 40px rgba(0,0,0,0.5); }
+  .tc::before { content:''; position:absolute; left:34px; top:0; bottom:0; width:1.5px; background:rgba(200,80,80,0.25); }
+  .tc::after { content:''; position:absolute; left:0; top:0; bottom:0; width:30px; background:linear-gradient(to right,#ede4cc,#f2e9d2); border-right:1px solid rgba(0,0,0,0.04); }
+  .tc .tn { position:absolute; top:12px; right:16px; font-family:'Marck Script',cursive; font-size:0.85rem; color:#b8a890; }
+  .tc h2 { font-family:'Marck Script',cursive; font-size:1.5rem; color:#3a2e28; font-weight:400; margin-bottom:10px; position:relative; z-index:1; }
+  .tc p { font-family:'Bad Script',cursive; font-size:1rem; line-height:28px; color:#5a4e44; position:relative; z-index:1; }
+  .tc .rm { display:inline-block; margin-top:14px; font-family:'Bad Script',cursive; font-size:0.95rem; color:#8a7a6a; position:relative; z-index:1; transition:color 0.3s; }
+  .tc:hover .rm { color:#3a2e28; }
+  .tc .rm::after { content:' →'; }
+  .tc .hole { position:absolute; left:8px; width:10px; height:10px; background:#1a1520; border-radius:50%; box-shadow:inset 0 1px 2px rgba(0,0,0,0.3); z-index:2; }
+  .tc .hole:nth-child(1){top:30px} .tc .hole:nth-child(2){top:80px} .tc .hole:nth-child(3){top:130px}
+  .tc .ink { position:absolute; bottom:14px; right:18px; width:6px; height:6px; background:rgba(30,25,40,0.07); border-radius:50%; z-index:1; }
+  .footer { margin-top:60px; text-align:center; font-family:'Bad Script',cursive; font-size:0.9rem; color:#5a4a5a; opacity:0.6; animation:fadeUp 0.6s ease-out 0.8s both; }
+  .bs { margin-top:60px; max-width:900px; width:100%; animation:fadeUp 0.6s ease-out 1s both; }
+  .dv { display:flex; align-items:center; gap:16px; margin-bottom:32px; }
+  .dv::before,.dv::after { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,#5a4a5a44,transparent); }
+  .dv span { font-family:'Bad Script',cursive; font-size:0.95rem; color:#8a7a6a; white-space:nowrap; letter-spacing:1px; }
+  .bc { position:relative; background:#f5eed9; background-image:linear-gradient(rgba(0,0,0,0) 0px,rgba(0,0,0,0) 27px,#c9b99a33 27px,#c9b99a33 28px); background-size:100% 28px; border-radius:3px 10px 10px 3px; padding:32px 28px 28px 44px; box-shadow:-3px 0 0 #e8dcc6,-6px 0 0 #ddd0b8,0 6px 30px rgba(0,0,0,0.4); text-decoration:none; color:inherit; display:block; max-width:380px; margin:0 auto; transition:transform 0.3s,box-shadow 0.3s; overflow:hidden; cursor:pointer; transform:translateZ(0); -webkit-font-smoothing:antialiased; backface-visibility:hidden; }
+  .bc:hover { transform:translateY(-4px) translateZ(0); box-shadow:-3px 0 0 #e8dcc6,-6px 0 0 #ddd0b8,0 12px 40px rgba(0,0,0,0.5); }
+  .bc::before { content:''; position:absolute; left:34px; top:0; bottom:0; width:1.5px; background:rgba(200,80,80,0.25); }
+  .bc::after { content:''; position:absolute; left:0; top:0; bottom:0; width:30px; background:linear-gradient(to right,#ede4cc,#f2e9d2); border-right:1px solid rgba(0,0,0,0.04); }
+  .bb { display:inline-block; background:#3a2e28; color:#f5eed9; font-family:'Bad Script',cursive; font-size:0.8rem; padding:3px 10px; border-radius:6px; margin-bottom:6px; position:relative; z-index:1; -webkit-font-smoothing:antialiased; }
+  .bc h2 { font-family:'Marck Script',cursive; font-size:1.4rem; color:#3a2e28; font-weight:400; margin-bottom:8px; position:relative; z-index:1; }
+  .bc p { font-family:'Bad Script',cursive; font-size:0.95rem; line-height:26px; color:#5a4e44; position:relative; z-index:1; }
+  .bc .rm { display:inline-block; margin-top:12px; font-family:'Bad Script',cursive; font-size:0.9rem; color:#8a7a6a; position:relative; z-index:1; transition:color 0.3s; }
+  .bc:hover .rm { color:#3a2e28; }
+  .bc .rm::after { content:' →'; }
+  .bc .hole { position:absolute; left:8px; width:10px; height:10px; background:#1a1520; border-radius:50%; box-shadow:inset 0 1px 2px rgba(0,0,0,0.3); z-index:2; }
+  .bc .hole:nth-child(1){top:30px} .bc .hole:nth-child(2){top:80px} .bc .hole:nth-child(3){top:130px}
+  .bg { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:32px; max-width:700px; margin:0 auto; }
+  .wb { background:#8b4560 !important; }
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+  @media(max-width:520px) { .header h1{font-size:2rem} .tales{gap:24px} .lang-sw{top:8px;right:8px} }
 </style>
 </head>
 <body>
-
-<div class="header">
-  <h1>Тетрадь сказок</h1>
-  <div class="subtitle">маленькие истории, нарисованные чернилами</div>
+<div class="lang-sw">
+  <button class="lb on" onclick="setLang('ru')">RU</button>
+  <button class="lb" onclick="setLang('bg')">BG</button>
+  <button class="lb" onclick="setLang('en')">EN</button>
 </div>
-
+<div class="header"><h1 data-t="title"></h1><div class="subtitle" data-t="subtitle"></div></div>
 <div class="tales" id="tales"></div>
-
-<div class="bonus-section">
-  <div class="divider"><span>а в конце тетради...</span></div>
-  <div class="bonus-grid">
-    <a href="kogda-tetrad-zakryvaetsya/" class="bonus-card warm-card">
-      <div class="hole"></div>
-      <div class="hole"></div>
-      <div class="hole"></div>
-      <div class="bonus-badge warm-badge">предпоследняя страница</div>
-      <h2>Когда тетрадь закрывается</h2>
-      <p>В одной тетради на разных страницах жили два кота. Они не могли встретиться — между ними было слишком много страниц...</p>
-      <span class="read-more">читать</span>
+<div class="bs">
+  <div class="dv"><span data-t="divider"></span></div>
+  <div class="bg">
+    <a href="kogda-tetrad-zakryvaetsya/" class="bc">
+      <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+      <div class="bb wb" data-t="pen_badge"></div>
+      <h2 data-t="pen_title"></h2>
+      <p data-t="pen_teaser"></p>
+      <span class="rm" data-t="read"></span>
     </a>
-    <a href="kot-posledney-stranitsy/" class="bonus-card">
-      <div class="hole"></div>
-      <div class="hole"></div>
-      <div class="hole"></div>
-      <div class="bonus-badge">последняя страница</div>
-      <h2>Кот из последней страницы</h2>
-      <p>На последней странице старой тетради кто-то однажды нарисовал кота. Рисунок был странный...</p>
-      <span class="read-more">открыть</span>
+    <a href="kot-posledney-stranitsy/" class="bc">
+      <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+      <div class="bb" data-t="last_badge"></div>
+      <h2 data-t="last_title"></h2>
+      <p data-t="last_teaser"></p>
+      <span class="rm" data-t="open"></span>
     </a>
   </div>
 </div>
-
-<div class="footer">если долго смотреть на чистый лист — между строк шевелятся крылья</div>
-
+<div class="footer" data-t="footer"></div>
 <script>
-// ═══════════════════════════════════════════════════
-//  ДОБАВЛЯЙ НОВЫЕ СКАЗКИ СЮДА ↓
-//  dir   — название папки
-//  title — название сказки
-//  teaser — короткий отрывок (1-2 предложения)
-// ═══════════════════════════════════════════════════
-const tales = [
-  {
-    dir: "creature",
-    title: "Существо из тетради",
-    teaser: "В тетради, между строчек, жило маленькое крылатое существо с хвостом, как у кометы..."
-  },
-  {
-    dir: "zvyozdny-shut",
-    title: "Звёздный шут",
-    teaser: "В городе, который не отмечали ни на одной карте, жил Шут со звёздной шапкой..."
-  },
-  {
-    dir: "strannik",
-    title: "Странник и сердце леса",
-    teaser: "В глубине старого леса жил маленький Странник в остроконечном капюшоне. Он был тем, кто слушает..."
-  },
-  {
-    dir: "dve-pary-glaz",
-    title: "Две пары глаз",
-    teaser: "В тёмном лесу жил странный кот с большими пустыми глазами. Если увидишь его — беги..."
-  },
-  // {
-  //   dir: "next-tale",
-  //   title: "Название следующей сказки",
-  //   teaser: "Краткое описание..."
-  // },
+const T={
+  ru:{title:"Тетрадь сказок",subtitle:"маленькие истории, нарисованные чернилами",read:"читать",open:"открыть",divider:"а в конце тетради...",pen_badge:"предпоследняя страница",pen_title:"Когда тетрадь закрывается",pen_teaser:"В одной тетради на разных страницах жили два кота. Они не могли встретиться — между ними было слишком много страниц...",last_badge:"последняя страница",last_title:"Кот из последней страницы",last_teaser:"На последней странице старой тетради кто-то однажды нарисовал кота. Рисунок был странный...",footer:"если долго смотреть на чистый лист — между строк шевелятся крылья"},
+  bg:{title:"Тетрадка с приказки",subtitle:"малки истории, нарисувани с мастило",read:"четете",open:"отворете",divider:"а в края на тетрадката...",pen_badge:"предпоследната страница",pen_title:"Когато тетрадката се затваря",pen_teaser:"В една тетрадка на различни страници живееха две котета. Не можеха да се срещнат — между тях имаше твърде много страници...",last_badge:"последната страница",last_title:"Котката от последната страница",last_teaser:"На последната страница на стара тетрадка някой веднъж нарисува котка. Рисунката беше странна...",footer:"ако гледаш дълго празен лист — между редовете трепкат крила"},
+  en:{title:"Notebook of Tales",subtitle:"little stories drawn in ink",read:"read",open:"open",divider:"and at the end of the notebook...",pen_badge:"the penultimate page",pen_title:"When the Notebook Closes",pen_teaser:"In one notebook, on different pages, there lived two cats. They couldn't meet — there were too many pages between them...",last_badge:"the last page",last_title:"The Cat from the Last Page",last_teaser:"On the last page of an old notebook, someone once drew a cat. The drawing was strange...",footer:"if you stare at a blank page long enough — wings stir between the lines"}
+};
+const tales=[
+  {dir:"creature",title:{ru:"Существо из тетради",bg:"Съществото от тетрадката",en:"The Notebook Creature"},teaser:{ru:"В тетради, между строчек, жило маленькое крылатое существо с хвостом, как у кометы...",bg:"В тетрадката, между редовете, живееше малко крилато същество с опашка като на комета...",en:"In a notebook, between the lines, there lived a tiny winged creature with a tail like a comet..."}},
+  {dir:"zvyozdny-shut",title:{ru:"Звёздный шут",bg:"Звездният шут",en:"The Starry Jester"},teaser:{ru:"В городе, который не отмечали ни на одной карте, жил Шут со звёздной шапкой...",bg:"В град, който не фигурираше на нито една карта, живееше Шут със звездна шапка...",en:"In a city that appeared on no map, there lived a Jester with a starry hat..."}},
+  {dir:"strannik",title:{ru:"Странник и сердце леса",bg:"Странникът и сърцето на гората",en:"The Wanderer and the Heart of the Forest"},teaser:{ru:"В глубине старого леса жил маленький Странник в остроконечном капюшоне. Он был тем, кто слушает...",bg:"В дълбините на старата гора живееше малък Странник с островръх качулка. Той беше този, който слуша...",en:"Deep in an old forest lived a little Wanderer in a pointed hood. He was the one who listens..."}},
+  {dir:"dve-pary-glaz",title:{ru:"Две пары глаз",bg:"Две двойки очи",en:"Two Pairs of Eyes"},teaser:{ru:"В тёмном лесу жил странный кот с большими пустыми глазами. Если увидишь его — беги...",bg:"В тъмната гора живееше странна котка с големи празни очи. Ако я видиш — бягай...",en:"In a dark forest lived a strange cat with big empty eyes. If you see it — run..."}}
 ];
-// ═══════════════════════════════════════════════════
-
-const container = document.getElementById('tales');
-
-tales.forEach((tale, i) => {
-  const card = document.createElement('a');
-  card.href = tale.dir + '/';
-  card.className = 'tale-card';
-  card.style.animationDelay = (0.3 + i * 0.15) + 's';
-
-  card.innerHTML = `
-    <div class="hole"></div>
-    <div class="hole"></div>
-    <div class="hole"></div>
-    <span class="tale-number">№ ${i + 1}</span>
-    <h2>${tale.title}</h2>
-    <p>${tale.teaser}</p>
-    <span class="read-more">читать</span>
-    <div class="ink"></div>
-  `;
-
-  container.appendChild(card);
-});
+function getLang(){const h=location.hash.replace('#','');return['ru','bg','en'].includes(h)?h:'ru'}
+function setLang(l){
+  location.hash=l==='ru'?'':l;
+  document.querySelectorAll('[data-t]').forEach(e=>{const k=e.getAttribute('data-t');if(T[l][k])e.textContent=T[l][k]});
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent.toLowerCase()===l));
+  document.querySelectorAll('a[href]').forEach(a=>{a.href=a.href.split('#')[0]+(l!=='ru'?'#'+l:'')});
+  renderTales(l);
+}
+function renderTales(l){
+  const c=document.getElementById('tales');c.innerHTML='';
+  tales.forEach((t,i)=>{
+    const a=document.createElement('a');
+    a.href=t.dir+'/'+(l!=='ru'?'#'+l:'');
+    a.className='tc';a.style.animationDelay=(0.3+i*0.15)+'s';
+    a.innerHTML=`<div class="hole"></div><div class="hole"></div><div class="hole"></div><span class="tn">№ ${i+1}</span><h2>${t.title[l]}</h2><p>${t.teaser[l]}</p><span class="rm">${T[l].read}</span><div class="ink"></div>`;
+    c.appendChild(a);
+  });
+}
+setLang(getLang());
 </script>
-
 </body>
 </html>
