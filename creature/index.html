@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M26 2c-4 3-8 8-10 14l-2 6 1 1c2-1 4-2 6-2C27 15 31 9 30 4c0-1-1-2-2-2h-2z%27 fill=%27%233a2e28%27 opacity=%270.9%27/%3E%3Cpath d=%27M14 22l-2 6c0 1 0 2 1 2s2-1 2-1l1-5-2-2z%27 fill=%27%233a2e28%27/%3E%3Ccircle cx=%278%27 cy=%2728%27 r=%273%27 fill=%27%231a1520%27 opacity=%270.7%27/%3E%3Cellipse cx=%278%27 cy=%2727%27 rx=%273%27 ry=%271.5%27 fill=%27%232c2420%27/%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Существо из тетради</title>
 <style>
@@ -33,7 +34,7 @@
 </style>
 </head>
 <body>
-<div class="lang-sw"><button class="lb on" onclick="setLang('ru')">RU</button><button class="lb" onclick="setLang('bg')">BG</button><button class="lb" onclick="setLang('en')">EN</button></div>
+<div class="lang-sw"><button class="lb on" onclick="setLang('ru')">RU</button><button class="lb" onclick="setLang('bg')">BG</button><button class="lb" onclick="setLang('en')">EN</button><button class="lb" onclick="setLang('ua')">UA</button></div>
 <div class="nb">
   <div class="holes"><div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div></div>
   <div class="ink-s"></div><div class="ink-s"></div><div class="ink-s"></div>
@@ -50,9 +51,10 @@
 const T={
   ru:{title:"Существо из тетради",p1:"В тетради, между строчек, жило маленькое крылатое существо с хвостом, как у кометы. Днём оно притворялось кляксой, а ночью расправляло тонкие крылья и вылетало из бумаги.",p2:"Однажды оно услышало, как человек вздыхает над пустой страницей — не было ни идей, ни слов. Существо тихо коснулось пера, и строчки сами собой наполнились сказками и смелыми мыслями.",p3:"С тех пор, если долго смотреть на чистый лист и не бояться темноты, можно заметить, как между строк шевелятся крылья — значит, вдохновение рядом.",back:"← назад к тетради"},
   bg:{title:"Съществото от тетрадката",p1:"В тетрадката, между редовете, живееше малко крилато същество с опашка като на комета. През деня се преструваше на мастилено петно, а през нощта разперваше тънки крила и излиташе от хартията.",p2:"Веднъж то чу как човек въздиша над празна страница — нямаше нито идеи, нито думи. Съществото тихо докосна перото и редовете сами се изпълниха с приказки и смели мисли.",p3:"Оттогава, ако гледаш дълго празен лист и не се боиш от тъмнината, можеш да забележиш как между редовете се раздвижват крила — значи вдъхновението е наблизо.",back:"← назад към тетрадката"},
+  ua:{title:"Істота із зошита",p1:"У зошиті, між рядків, жила маленька крилата істота з хвостом, як у комети. Вдень вона прикидалася плямою від чорнила, а вночі розправляла тонкі крила і вилітала з паперу.",p2:"Одного разу вона почула, як людина зітхає над порожньою сторінкою — не було ні ідей, ні слів. Істота тихо торкнулася пера, і рядки самі собою наповнилися казками та сміливими думками.",p3:"Відтоді, якщо довго дивитися на чистий аркуш і не боятися темряви, можна помітити, як між рядків ворушаться крила — значить, натхнення поруч.",back:"← назад до зошита"},
   en:{title:"The Notebook Creature",p1:"In a notebook, between the lines, there lived a tiny winged creature with a tail like a comet. By day it pretended to be an ink blot, and by night it spread its thin wings and flew out of the paper.",p2:"One day it heard a person sighing over an empty page — there were no ideas, no words. The creature quietly touched the pen, and the lines filled themselves with fairy tales and bold thoughts.",p3:"Since then, if you stare at a blank page long enough and don't fear the darkness, you can notice wings stirring between the lines — it means inspiration is near.",back:"← back to the notebook"}
 };
-function getLang(){const h=location.hash.replace('#','');return['ru','bg','en'].includes(h)?h:'ru'}
+function getLang(){const h=location.hash.replace('#','');return['ru','bg','en','ua'].includes(h)?h:'ru'}
 function setLang(l){location.hash=l==='ru'?'':l;document.querySelectorAll('[data-t]').forEach(e=>{const k=e.getAttribute('data-t');if(T[l]&&T[l][k])e.textContent=T[l][k]});document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent.toLowerCase()===l));const bk=document.querySelector('.bl');if(bk)bk.href='../'+(l!=='ru'?'#'+l:'')}
 setLang(getLang());
 </script>
