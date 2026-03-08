@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M26 2c-4 3-8 8-10 14l-2 6 1 1c2-1 4-2 6-2C27 15 31 9 30 4c0-1-1-2-2-2h-2z%27 fill=%27%233a2e28%27 opacity=%270.9%27/%3E%3Cpath d=%27M14 22l-2 6c0 1 0 2 1 2s2-1 2-1l1-5-2-2z%27 fill=%27%233a2e28%27/%3E%3Ccircle cx=%278%27 cy=%2728%27 r=%273%27 fill=%27%231a1520%27 opacity=%270.7%27/%3E%3Cellipse cx=%278%27 cy=%2727%27 rx=%273%27 ry=%271.5%27 fill=%27%232c2420%27/%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Тетрадь сказок</title>
 <style>
@@ -63,6 +64,7 @@
   <button class="lb on" onclick="setLang('ru')">RU</button>
   <button class="lb" onclick="setLang('bg')">BG</button>
   <button class="lb" onclick="setLang('en')">EN</button>
+  <button class="lb" onclick="setLang('ua')">UA</button>
 </div>
 <div class="header"><h1 data-t="title"></h1><div class="subtitle" data-t="subtitle"></div></div>
 <div class="tales" id="tales"></div>
@@ -90,15 +92,16 @@
 const T={
   ru:{title:"Тетрадь сказок",subtitle:"маленькие истории, нарисованные чернилами",read:"читать",open:"открыть",divider:"а в конце тетради...",pen_badge:"предпоследняя страница",pen_title:"Когда тетрадь закрывается",pen_teaser:"В одной тетради на разных страницах жили два кота. Они не могли встретиться — между ними было слишком много страниц...",last_badge:"последняя страница",last_title:"Кот из последней страницы",last_teaser:"На последней странице старой тетради кто-то однажды нарисовал кота. Рисунок был странный...",footer:"если долго смотреть на чистый лист — между строк шевелятся крылья"},
   bg:{title:"Тетрадка с приказки",subtitle:"малки истории, нарисувани с мастило",read:"четете",open:"отворете",divider:"а в края на тетрадката...",pen_badge:"предпоследната страница",pen_title:"Когато тетрадката се затваря",pen_teaser:"В една тетрадка на различни страници живееха две котета. Не можеха да се срещнат — между тях имаше твърде много страници...",last_badge:"последната страница",last_title:"Котката от последната страница",last_teaser:"На последната страница на стара тетрадка някой веднъж нарисува котка. Рисунката беше странна...",footer:"ако гледаш дълго празен лист — между редовете трепкат крила"},
+  ua:{title:"Зошит казок",subtitle:"маленькі історії, намальовані чорнилом",read:"читати",open:"відкрити",divider:"а в кінці зошита...",pen_badge:"передостання сторінка",pen_title:"Коли зошит закривається",pen_teaser:"В одному зошиті на різних сторінках жили два коти. Вони не могли зустрітися — між ними було занадто багато сторінок...",last_badge:"остання сторінка",last_title:"Кіт з останньої сторінки",last_teaser:"На останній сторінці старого зошита хтось одного разу намалював кота. Малюнок був дивний...",footer:"якщо довго дивитися на чистий аркуш — між рядків ворушаться крила"},
   en:{title:"Notebook of Tales",subtitle:"little stories drawn in ink",read:"read",open:"open",divider:"and at the end of the notebook...",pen_badge:"the penultimate page",pen_title:"When the Notebook Closes",pen_teaser:"In one notebook, on different pages, there lived two cats. They couldn't meet — there were too many pages between them...",last_badge:"the last page",last_title:"The Cat from the Last Page",last_teaser:"On the last page of an old notebook, someone once drew a cat. The drawing was strange...",footer:"if you stare at a blank page long enough — wings stir between the lines"}
 };
 const tales=[
-  {dir:"creature",title:{ru:"Существо из тетради",bg:"Съществото от тетрадката",en:"The Notebook Creature"},teaser:{ru:"В тетради, между строчек, жило маленькое крылатое существо с хвостом, как у кометы...",bg:"В тетрадката, между редовете, живееше малко крилато същество с опашка като на комета...",en:"In a notebook, between the lines, there lived a tiny winged creature with a tail like a comet..."}},
-  {dir:"zvyozdny-shut",title:{ru:"Звёздный шут",bg:"Звездният шут",en:"The Starry Jester"},teaser:{ru:"В городе, который не отмечали ни на одной карте, жил Шут со звёздной шапкой...",bg:"В град, който не фигурираше на нито една карта, живееше Шут със звездна шапка...",en:"In a city that appeared on no map, there lived a Jester with a starry hat..."}},
-  {dir:"strannik",title:{ru:"Странник и сердце леса",bg:"Странникът и сърцето на гората",en:"The Wanderer and the Heart of the Forest"},teaser:{ru:"В глубине старого леса жил маленький Странник в остроконечном капюшоне. Он был тем, кто слушает...",bg:"В дълбините на старата гора живееше малък Странник с островръх качулка. Той беше този, който слуша...",en:"Deep in an old forest lived a little Wanderer in a pointed hood. He was the one who listens..."}},
-  {dir:"dve-pary-glaz",title:{ru:"Две пары глаз",bg:"Две двойки очи",en:"Two Pairs of Eyes"},teaser:{ru:"В тёмном лесу жил странный кот с большими пустыми глазами. Если увидишь его — беги...",bg:"В тъмната гора живееше странна котка с големи празни очи. Ако я видиш — бягай...",en:"In a dark forest lived a strange cat with big empty eyes. If you see it — run..."}}
+  {dir:"creature",title:{ru:"Существо из тетради",bg:"Съществото от тетрадката",en:"The Notebook Creature",ua:"Істота із зошита"},teaser:{ru:"В тетради, между строчек, жило маленькое крылатое существо с хвостом, как у кометы...",bg:"В тетрадката, между редовете, живееше малко крилато същество с опашка като на комета...",en:"In a notebook, between the lines, there lived a tiny winged creature with a tail like a comet...",ua:"У зошиті, між рядків, жила маленька крилата істота з хвостом, як у комети..."}},
+  {dir:"zvyozdny-shut",title:{ru:"Звёздный шут",bg:"Звездният шут",en:"The Starry Jester",ua:"Зоряний блазень"},teaser:{ru:"В городе, который не отмечали ни на одной карте, жил Шут со звёздной шапкой...",bg:"В град, който не фигурираше на нито една карта, живееше Шут със звездна шапка...",en:"In a city that appeared on no map, there lived a Jester with a starry hat...",ua:"У місті, якого не було на жодній мапі, жив Блазень із зоряним ковпаком..."}},
+  {dir:"strannik",title:{ru:"Странник и сердце леса",bg:"Странникът и сърцето на гората",en:"The Wanderer and the Heart of the Forest",ua:"Мандрівник і серце лісу"},teaser:{ru:"В глубине старого леса жил маленький Странник в остроконечном капюшоне. Он был тем, кто слушает...",bg:"В дълбините на старата гора живееше малък Странник с островръх качулка. Той беше този, който слуша...",en:"Deep in an old forest lived a little Wanderer in a pointed hood. He was the one who listens...",ua:"У глибині старого лісу жив маленький Мандрівник у гострому каптурі. Він був тим, хто слухає..."}},
+  {dir:"dve-pary-glaz",title:{ru:"Две пары глаз",bg:"Две двойки очи",en:"Two Pairs of Eyes",ua:"Дві пари очей"},teaser:{ru:"В тёмном лесу жил странный кот с большими пустыми глазами. Если увидишь его — беги...",bg:"В тъмната гора живееше странна котка с големи празни очи. Ако я видиш — бягай...",en:"In a dark forest lived a strange cat with big empty eyes. If you see it — run...",ua:"У темному лісі жив дивний кіт із великими порожніми очима. Якщо побачиш його — тікай..."}}
 ];
-function getLang(){const h=location.hash.replace('#','');return['ru','bg','en'].includes(h)?h:'ru'}
+function getLang(){const h=location.hash.replace('#','');return['ru','bg','en','ua'].includes(h)?h:'ru'}
 function setLang(l){
   location.hash=l==='ru'?'':l;
   document.querySelectorAll('[data-t]').forEach(e=>{const k=e.getAttribute('data-t');if(T[l][k])e.textContent=T[l][k]});
